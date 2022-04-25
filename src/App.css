@@ -1,5 +1,76 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  padding-top: 40px;
+}
+.container-grid {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px !important;
+}
+.page-title {
+  color: #fff;
 }
 
+.single-product-card {
+background-color: #282c34 !important;
+border-color: rgb(30, 73, 118) !important;
+border-radius: 10px !important;
+}
+.single-product-card:hover {
+  border-color: #ffff !important;
+}
+.single-product-card-name {
+  color: #fff !important;
+}
 
+.single-product-card-price {
+  color: #fff !important;
+}
+.btn-add-product {
+  /* float: right;
+  margin-right: 55px!important; */
+}
+.delete-dialog-title {
+  color: #fff !important;
+}
+.delete-confirmation-dialog{
+  background-color: #282c34 !important;
+  border-radius: 10px !important;
+  border-color: #fff !important;
+}
+.delete-confirmation-dialog:hover{
+  border-color: yellowgreen !important;
+}
+.delete-dialog-text {
+  color: #fff !important;
+}
+.delete-product-dialog-actions{
+  /* display: flex;
+  justify-content: center; */
+  float: right;
+}
+.mph-edit-form-card {
+  /* display: flex;
+  justify-content: center; */
+  background-color: #282c34 !important;
+  border-color: #fff !important;
+  border-radius: 10px !important;
+}
+.mph-edit-form-card:hover{
+  border-color: yellowgreen !important;
+}
+.mph-textfield {
+  border-color: #fff !important;
+  width: 100%;
+  margin-bottom: 20px !important;
+ 
+}
+.mph-edit-form-title {
+  padding-bottom: 10px;
+  color: #fff !important;
+}
+TextField label.Mui-focused {
+  color: 'green',
+}
