@@ -170,6 +170,12 @@ const SingleProductCard = ({ data }) => {
     </div>
   );
 
+  // shorten text
+  const shortenText = (string = '', maxLength = 50) => 
+  string.length > maxLength
+    ? `${string.substring(0, maxLength)}...`
+    : string
+
   return (
     <div>
       <Card
@@ -185,7 +191,7 @@ const SingleProductCard = ({ data }) => {
               component="div"
               className="single-product-card-name"
             >
-              {data.name}
+             ${shortenText(data.name, 15)}
             </Typography>
             <Typography
               variant="body2"

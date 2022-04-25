@@ -9,6 +9,9 @@ import Popper from "@mui/material/Popper";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import Tooltip from '@mui/material/Tooltip';
+import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert'
+
 
 import moment from "moment";
 import Card from "@mui/material/Card";
@@ -33,6 +36,7 @@ function App() {
   const [productTitle, setProductTitle] = useState("");
   const [productPrice, setProductPrice] = useState(null);
   const [isLoading, setIsLoading] = useState(true)
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
   
   // redux variables
   const dispatch = useDispatch()
@@ -58,6 +62,10 @@ function App() {
 
   // method to edit product
   const handleAddProduct = () => {
+    if (productTitle === "" || productPrice === ""){
+      setShowErrorAlert(true)
+      return
+    }
     const newPrice = {
       "id": Object.keys(productPrices).length + 1,
       "price": productPrice,
@@ -76,6 +84,11 @@ function App() {
   const handleClosePopper = () => {
     setPopperOpen(false);
   };
+
+  // 
+  const handleCloseAlert = () => {
+    setShowErrorAlert(false)
+  }
 
   // fetch data from API
   const fetchProductsFromServer = () => {
@@ -197,6 +210,11 @@ for (const id in products) {
           </Fade>
         )}
       </Popper>
+      <Snackbar open={showErrorAlert} autoHideDuration={6000} onClose={handleCloseAlert}>
+        <Alert onClose={handleCloseAlert} severity="error" sx={{ width: '100%' }}>
+          You cannot submit an empty form.
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

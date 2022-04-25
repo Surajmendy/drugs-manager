@@ -17,6 +17,10 @@
   background-color: #282c34 !important;
   border-color: rgb(30, 73, 118) !important;
   border-radius: 10px !important;
+  width:200px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  
 }
 .single-product-card:hover {
   border-color: #ffff !important;
@@ -62,9 +66,10 @@
   border-color: yellowgreen !important;
 }
 .mph-textfield {
-  border-color: #fff !important;
+ 
   width: 100%;
   margin-bottom: 20px !important;
+  border-color: #fff !important;
 }
 .mph-edit-form-title {
   padding-bottom: 10px;
@@ -72,4 +77,7 @@
 }
 TextField label.Mui-focused {
   color: "green";
+}
+.MuiOutlinedInput-input .MuiInputBase-input {
+  border-color: red !important;
 }

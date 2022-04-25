@@ -10,6 +10,7 @@ const productFormInputs = ({
   return (
     <div>
       <TextField
+      required
         label="Product Title"
         type="text"
         name="productTitle"
@@ -19,10 +20,11 @@ const productFormInputs = ({
         onChange={handleProductTitleChange}
       />
       <TextField
+      required
         className="mph-textfield"
         label="Product Price"
         id="productPrice"
-        defaultValue={productPrice || 0}
+        defaultValue={productPrice || ""}
         onChange={handleProductPriceChange}
       />
     </div>
