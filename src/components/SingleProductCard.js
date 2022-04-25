@@ -41,7 +41,7 @@ const SingleProductCard = ({ data }) => {
     if (type === "delete") {
       updateShowDeleteBool(true);
     } else {
-      const latestPrice = 10.99;
+      const latestPrice = getLatestPrice(selectedData.prices);
       updateShowDeleteBool(false);
       setProductTitle(selectedData.name);
       setProductPrice(latestPrice);
@@ -170,6 +170,12 @@ const SingleProductCard = ({ data }) => {
     </div>
   );
 
+  // shorten text
+  const shortenText = (string = '', maxLength = 50) => 
+  string.length > maxLength
+    ? `${string.substring(0, maxLength)}...`
+    : string
+
   return (
     <div>
       <Card
@@ -185,7 +191,7 @@ const SingleProductCard = ({ data }) => {
               component="div"
               className="single-product-card-name"
             >
-              {data.name}
+             ${shortenText(data.name, 15)}
             </Typography>
             <Typography
               variant="body2"
