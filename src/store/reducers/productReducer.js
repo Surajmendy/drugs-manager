@@ -52,7 +52,29 @@ export const productReducer = createSlice({
 
     // edit a single product
     editProduct: (state, action) => {
-      return state;
+        console.log(action.payload)
+        const { id, name, price } = action.payload;
+        // find the exixstence of the product id 
+        if(id in state.entities.products){
+            // update the name
+            state.entities.products[id].name = name
+            // add new price id to the array of price ids
+            state.entities.products[id].prices.push(price.id)
+            // add price object to prices schema
+            const priceToBeAdded = {
+                [price.id]: price,
+            }
+            // state.entities.prices.push(priceToBeAdded)
+            state.entities = {
+                prices: {
+                 ...state.entities.prices, ...priceToBeAdded
+                },
+                products: {
+                 ...state.entities.products
+                }
+            }
+        }
+      return state
     },
     // delete a product
     deleteProduct: (state, action) => {

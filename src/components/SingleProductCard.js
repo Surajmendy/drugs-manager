@@ -12,6 +12,7 @@ import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
+import { editProduct } from '../store/reducers/productReducer'
 import moment from "moment";
 import ProductFormInputs from "../components/ProductFormInputs";
 const SingleProductCard = ({ data }) => {
@@ -61,7 +62,19 @@ const SingleProductCard = ({ data }) => {
   };
   // method to edit product
   const handleEditProduct = () => {
-    console.log("editted");
+    const newPrice = {
+        id: Object.keys(productPrices).length + 1,
+        price: productPrice,
+        date: moment().format(),
+      };
+      const productData = {
+        id: selectedProductata.id,
+        name: productTitle,
+        price: newPrice,
+      };
+      // dispatch edit product
+      dispatch(editProduct(productData));
+      handleClosePopper();
   };
   const handleClosePopper = () => {
     setOpenPopper(false);
