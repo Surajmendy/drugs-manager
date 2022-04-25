@@ -78,7 +78,17 @@ export const productReducer = createSlice({
     },
     // delete a product
     deleteProduct: (state, action) => {
-      return state;
+        const id = action.payload;
+        // remove id from product object
+    
+        // remove id from results
+        if(id in state.entities.products){ 
+            delete state.entities.products[id]
+            // get index of the productId
+            // filter out productId out from result array
+            state.result = state.result.filter(productId => productId !== id);
+        }
+        return state
     },
   },
 });

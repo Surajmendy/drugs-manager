@@ -12,7 +12,7 @@ import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { editProduct } from '../store/reducers/productReducer'
+import { editProduct, deleteProduct } from '../store/reducers/productReducer'
 import moment from "moment";
 import ProductFormInputs from "../components/ProductFormInputs";
 const SingleProductCard = ({ data }) => {
@@ -58,7 +58,8 @@ const SingleProductCard = ({ data }) => {
 
   // method to delete product
   const handleDeleteProduct = () => {
-    console.log("deleted");
+    dispatch(deleteProduct(selectedProductId));
+    handleClosePopper();
   };
   // method to edit product
   const handleEditProduct = () => {
