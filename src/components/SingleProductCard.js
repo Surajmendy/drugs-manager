@@ -41,7 +41,7 @@ const SingleProductCard = ({ data }) => {
     if (type === "delete") {
       updateShowDeleteBool(true);
     } else {
-      const latestPrice = 10.99;
+      const latestPrice = getLatestPrice(selectedData.prices);
       updateShowDeleteBool(false);
       setProductTitle(selectedData.name);
       setProductPrice(latestPrice);
