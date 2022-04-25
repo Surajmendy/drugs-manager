@@ -15,7 +15,12 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import ProductFormInputs from "./components/ProductFormInputs";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchProductFromApi, loadProductFromStorage } from './services/index'
+import {fetchInitialProduct } from './store/reducers/productReducer'
+import * as schema from './store/schema/productSchema'
+import { normalize } from "normalizr";
 
 function App() {
 
@@ -25,6 +30,7 @@ function App() {
   const [placement, setPlacement] = useState();
   const [productTitle, setProductTitle] = useState("");
   const [productPrice, setProductPrice] = useState(null);
+  const dispatch = useDispatch()
 
 
   // method handlers
@@ -47,10 +53,26 @@ function App() {
   const handleAddProduct = () => {
    console.log('added')
   };
-
+// close popper
   const handleClosePopper = () => {
     setPopperOpen(false);
   };
+
+  // fetch data from API
+  const fetchProductsFromServer = () => {
+    // fetch persisted data from local store
+    const persistedData = loadProductFromStorage()
+    if(persistedData === undefined){
+      // fetch from api if localstore is undefined
+     fetchProductFromApi().then((response) => {
+      // normalize the response and dispatch to store
+      dispatch(fetchInitialProduct(normalize(response.data.products, schema.arrayOfProducts)))
+     })
+    } else{
+      dispatch(fetchInitialProduct(persistedData.productsInfo))
+    }
+    }
+
 
   // product form view
   const productFormView = () => (
@@ -96,6 +118,10 @@ function App() {
       </Card>
     </div>
   );
+
+  useEffect (() => {
+    fetchProductsFromServer()
+  }, [])
   return (
     <div className="App">
       <Container fixed>

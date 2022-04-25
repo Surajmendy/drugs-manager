@@ -5,8 +5,13 @@ export const productReducer = createSlice({
   name: "product",
   initialState: init,
   reducers: {
-    // to fetch initial data to sstore
+    // to fetch initial data. the data passed is normalized with normalizr
     fetchInitialProduct: (state = init, action) => {
+      if(action.payload){
+          return {
+              ...action.payload
+          }
+      }
       return state;
     },
     // add product - to be completed later
