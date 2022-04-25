@@ -1,26 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { store } from './store'
-import { Provider } from 'react-redux';
-import { loadProductFromStorage, saveProductToStorage } from './services';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { store } from "./store";
+import { Provider } from "react-redux";
+import { saveProductToStorage } from "./services";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
 //subscribe to store for changes and sync data with local storage
-store.subscribe(() =>{
-  saveProductToStorage(
-    store.getState()
-  )
-})
+store.subscribe(() => {
+  saveProductToStorage(store.getState());
+});
 
 root.render(
   <React.StrictMode>
-  <Provider store={store}>
-  <App />
-  </Provider>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

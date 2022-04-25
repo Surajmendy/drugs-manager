@@ -14,9 +14,9 @@
 }
 
 .single-product-card {
-background-color: #282c34 !important;
-border-color: rgb(30, 73, 118) !important;
-border-radius: 10px !important;
+  background-color: #282c34 !important;
+  border-color: rgb(30, 73, 118) !important;
+  border-radius: 10px !important;
 }
 .single-product-card:hover {
   border-color: #ffff !important;
@@ -35,18 +35,18 @@ border-radius: 10px !important;
 .delete-dialog-title {
   color: #fff !important;
 }
-.delete-confirmation-dialog{
+.delete-confirmation-dialog {
   background-color: #282c34 !important;
   border-radius: 10px !important;
   border-color: #fff !important;
 }
-.delete-confirmation-dialog:hover{
+.delete-confirmation-dialog:hover {
   border-color: yellowgreen !important;
 }
 .delete-dialog-text {
   color: #fff !important;
 }
-.delete-product-dialog-actions{
+.delete-product-dialog-actions {
   /* display: flex;
   justify-content: center; */
   float: right;
@@ -58,19 +58,18 @@ border-radius: 10px !important;
   border-color: #fff !important;
   border-radius: 10px !important;
 }
-.mph-edit-form-card:hover{
+.mph-edit-form-card:hover {
   border-color: yellowgreen !important;
 }
 .mph-textfield {
   border-color: #fff !important;
   width: 100%;
   margin-bottom: 20px !important;
- 
 }
 .mph-edit-form-title {
   padding-bottom: 10px;
   color: #fff !important;
 }
 TextField label.Mui-focused {
-  color: 'green',
+  color: "green";
 }

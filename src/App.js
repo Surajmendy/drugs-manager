@@ -9,7 +9,6 @@ import Popper from "@mui/material/Popper";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import Tooltip from '@mui/material/Tooltip';
-import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 import moment from "moment";
 import Card from "@mui/material/Card";
@@ -39,7 +38,6 @@ function App() {
   const dispatch = useDispatch()
   const productsInformation = useSelector(store => store.productsInfo);
   const products = productsInformation?.entities?.products
-  const productIds = productsInformation?.result
   const productPrices = productsInformation?.entities?.prices
 
   // method handlers

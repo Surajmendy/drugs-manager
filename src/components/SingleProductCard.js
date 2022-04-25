@@ -11,13 +11,12 @@ import Popper from "@mui/material/Popper";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { editProduct, deleteProduct } from '../store/reducers/productReducer'
+import { useSelector, useDispatch } from "react-redux";
+import { editProduct, deleteProduct } from "../store/reducers/productReducer";
 import moment from "moment";
 import ProductFormInputs from "../components/ProductFormInputs";
 const SingleProductCard = ({ data }) => {
-
-    // react state vars
+  // react state vars
   const [anchorEl, setAnchorEl] = useState(null);
   const [openPopper, setOpenPopper] = useState(false);
   const [placement, setPlacement] = useState();
@@ -29,8 +28,6 @@ const SingleProductCard = ({ data }) => {
 
   // redux state variables
   const productsInformation = useSelector((store) => store.productsInfo);
-  const products = productsInformation?.entities?.products;
-  const productIds = productsInformation?.result;
   const productPrices = productsInformation?.entities?.prices;
   const dispatch = useDispatch();
   // method handlers
@@ -64,18 +61,18 @@ const SingleProductCard = ({ data }) => {
   // method to edit product
   const handleEditProduct = () => {
     const newPrice = {
-        id: Object.keys(productPrices).length + 1,
-        price: productPrice,
-        date: moment().format(),
-      };
-      const productData = {
-        id: selectedProductata.id,
-        name: productTitle,
-        price: newPrice,
-      };
-      // dispatch edit product
-      dispatch(editProduct(productData));
-      handleClosePopper();
+      id: Object.keys(productPrices).length + 1,
+      price: productPrice,
+      date: moment().format(),
+    };
+    const productData = {
+      id: selectedProductata.id,
+      name: productTitle,
+      price: newPrice,
+    };
+    // dispatch edit product
+    dispatch(editProduct(productData));
+    handleClosePopper();
   };
   const handleClosePopper = () => {
     setOpenPopper(false);
@@ -90,7 +87,6 @@ const SingleProductCard = ({ data }) => {
         singleProductPricelist.push(productPrices[priceId]);
       }
     });
-    console.log("pricelist", singleProductPricelist);
     singleProductPricelist.sort((a, b) => new Date(b.date) - new Date(a.date));
     return singleProductPricelist[0].price;
   };
