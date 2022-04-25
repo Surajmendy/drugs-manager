@@ -10,6 +10,8 @@ import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import Tooltip from '@mui/material/Tooltip';
 import ClickAwayListener from "@mui/material/ClickAwayListener";
+
+import moment from "moment";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
@@ -19,7 +21,7 @@ import LoadingComponent from "./components/LoadingComponent"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductFromApi, loadProductFromStorage } from './services/index'
-import {fetchInitialProduct } from './store/reducers/productReducer'
+import {fetchInitialProduct,addProduct } from './store/reducers/productReducer'
 import * as schema from './store/schema/productSchema'
 import { normalize } from "normalizr";
 
@@ -58,7 +60,19 @@ function App() {
 
   // method to edit product
   const handleAddProduct = () => {
-   console.log('added')
+    const newPrice = {
+      "id": Object.keys(productPrices).length + 1,
+      "price": productPrice,
+      "date": moment().format()
+  }
+  const productData = {
+      id:Object.keys(products).length + 1,
+      name: productTitle,
+      price: newPrice
+  }
+  // dispatch edit product
+  dispatch(addProduct(productData))
+  handleClosePopper()
   };
 // close popper
   const handleClosePopper = () => {
