@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const init = {};
-export const productSlice = createSlice({
+export const productReducer = createSlice({
   name: "product",
   initialState: init,
   reducers: {
@@ -27,6 +27,6 @@ export const productSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { addProduct, editProduct, deleteProduct, fetchInitialProduct } =
-  productSlice.actions;
+productReducer.actions;
 
-export default productSlice.reducer;
+export default productReducer.reducer;
