@@ -14,9 +14,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import ProductFormInputs from "./components/ProductFormInputs";
+import LoadingComponent from "./components/LoadingComponent"
 
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchProductFromApi, loadProductFromStorage } from './services/index'
 import {fetchInitialProduct } from './store/reducers/productReducer'
 import * as schema from './store/schema/productSchema'
@@ -24,14 +25,20 @@ import { normalize } from "normalizr";
 
 function App() {
 
-  // states
+  // react states variables
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setPopperOpen] = useState(false);
   const [placement, setPlacement] = useState();
   const [productTitle, setProductTitle] = useState("");
   const [productPrice, setProductPrice] = useState(null);
+  const [isLoading, setIsLoading] = useState(true)
+  
+  // redux variables
   const dispatch = useDispatch()
-
+  const productsInformation = useSelector(store => store.productsInfo);
+  const products = productsInformation?.entities?.products
+  const productIds = productsInformation?.result
+  const productPrices = productsInformation?.entities?.prices
 
   // method handlers
   const handleProductTitleChange = (event) => {
@@ -67,11 +74,23 @@ function App() {
      fetchProductFromApi().then((response) => {
       // normalize the response and dispatch to store
       dispatch(fetchInitialProduct(normalize(response.data.products, schema.arrayOfProducts)))
+      setIsLoading(false)
      })
     } else{
       dispatch(fetchInitialProduct(persistedData.productsInfo))
+      setIsLoading(false)
     }
     }
+
+// get product list from object
+const productList = [];
+for (const id in products) {
+    console.log(id)
+      const productItem = products[id];
+      productList.push(
+        productItem
+      );
+}
 
 
   // product form view
@@ -146,7 +165,16 @@ function App() {
         </Typography>
         <div>
           <Grid container spacing={2} className="container-grid">
-           <p>content</p>
+           <>
+             {
+               isLoading ? <LoadingComponent/> : productList?.map((singleProduct) => (
+                <Grid item key={singleProduct.id}>
+    <SingleProduct data={singleProduct}/>
+    </Grid>
+               )
+               )
+             }
+           </>
           </Grid>
         </div>
       </Container>

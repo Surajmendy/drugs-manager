@@ -11,9 +11,12 @@ import Popper from "@mui/material/Popper";
 import Fade from "@mui/material/Fade";
 import Paper from "@mui/material/Paper";
 import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import moment from "moment";
 import ProductFormInputs from "../components/ProductFormInputs";
 const SingleProductCard = ({ data }) => {
+
+    // react state vars
   const [anchorEl, setAnchorEl] = useState(null);
   const [openPopper, setOpenPopper] = useState(false);
   const [placement, setPlacement] = useState();
@@ -23,18 +26,24 @@ const SingleProductCard = ({ data }) => {
   const [productTitle, setProductTitle] = useState("");
   const [productPrice, setProductPrice] = useState(null);
 
+  // redux state variables
+  const productsInformation = useSelector((store) => store.productsInfo);
+  const products = productsInformation?.entities?.products;
+  const productIds = productsInformation?.result;
+  const productPrices = productsInformation?.entities?.prices;
+  const dispatch = useDispatch();
+  // method handlers
   const handleProductTitleChange = (event) => {
     setProductTitle(event.target.value);
   };
   const handleProductPriceChange = (event) => {
     setProductPrice(event.target.value);
   };
-
   const showPopperHandler = (newPlacement, selectedData, type) => (event) => {
     if (type === "delete") {
       updateShowDeleteBool(true);
     } else {
-      const latestPrice = 10.99
+      const latestPrice = 10.99;
       updateShowDeleteBool(false);
       setProductTitle(selectedData.name);
       setProductPrice(latestPrice);
@@ -48,18 +57,28 @@ const SingleProductCard = ({ data }) => {
 
   // method to delete product
   const handleDeleteProduct = () => {
-    console.log('deleted')
+    console.log("deleted");
   };
   // method to edit product
   const handleEditProduct = () => {
-    console.log('editted')
+    console.log("editted");
   };
   const handleClosePopper = () => {
     setOpenPopper(false);
   };
 
+  // method to get latest price
   const getLatestPrice = (prices) => {
-    console.log('price..')
+    let singleProductPricelist = [];
+
+    prices.forEach((priceId) => {
+      if (priceId in productPrices) {
+        singleProductPricelist.push(productPrices[priceId]);
+      }
+    });
+    console.log("pricelist", singleProductPricelist);
+    singleProductPricelist.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return singleProductPricelist[0].price;
   };
 
   // product form View

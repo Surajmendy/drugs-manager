@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loadProductFromStorage } from "../../services";
 
-const init = {};
+const persistedData = loadProductFromStorage()
+
+const init = persistedData !== undefined ? persistedData.productsInfo : {}
 export const productReducer = createSlice({
   name: "product",
   initialState: init,
