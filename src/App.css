@@ -75,9 +75,7 @@
   padding-bottom: 10px;
   color: #fff !important;
 }
-TextField label.Mui-focused {
-  color: "green";
-}
-.MuiOutlinedInput-input .MuiInputBase-input {
-  border-color: red !important;
+
+.no-product-added {
+ color: #fff;
 }
