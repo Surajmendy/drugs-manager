@@ -191,7 +191,7 @@ const SingleProductCard = ({ data }) => {
               component="div"
               className="single-product-card-name"
             >
-             ${shortenText(data.name, 18)}
+             {shortenText(data.name, 18)}
             </Typography>
             <Typography
               variant="body2"

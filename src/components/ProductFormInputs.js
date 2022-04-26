@@ -10,7 +10,9 @@ const productFormInputs = ({
   return (
     <div>
       <TextField
+      variant="filled"
       required
+      color="success"
         label="Product Title"
         type="text"
         name="productTitle"
@@ -20,7 +22,10 @@ const productFormInputs = ({
         onChange={handleProductTitleChange}
       />
       <TextField
-      required
+      color="success"
+      variant="filled"
+        type='number'
+        required
         className="mph-textfield"
         label="Product Price"
         id="productPrice"
