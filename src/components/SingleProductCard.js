@@ -60,6 +60,9 @@ const SingleProductCard = ({ data }) => {
   };
   // method to edit product
   const handleEditProduct = () => {
+    if (productTitle === "" || productPrice === "") {
+      return;
+    }
     const newPrice = {
       id: Object.keys(productPrices).length + 1,
       price: productPrice,
